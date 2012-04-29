@@ -47,7 +47,7 @@ module ContextIO
         @port = json['imap']['port']
         @use_ssl = json['imap']['use_ssl']
         @oauth = json['imap']['oauth']
-        @documentation = json['documentation'].inject(&:symbolize_keys)
+        @documentation = json['documentation'].inject{|i| i.symbolize_keys }
       end
 
       discovery
