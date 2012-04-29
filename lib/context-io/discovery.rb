@@ -1,5 +1,9 @@
 module ContextIO
   class Discovery < Resource
+    # @api public
+    # @return [String] The various settings of the account holder mailbox
+    attr_reader :email, :type, :server, :username, :port, :use_ssl, :oauth, :documentation
+    
     # Discover IMAP settings for a given email address
     #
     # This is useful when you want to add an email account under your API key
