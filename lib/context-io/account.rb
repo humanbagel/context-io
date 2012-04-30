@@ -46,6 +46,8 @@ module ContextIO
     # @return [Array<ContextIO::Source>] The sources associated with this
     #   account.
     attr_reader :sources
+    
+    attr_reader :new_source
 
     # Get all the accounts, optionally filtered with a query
     #
@@ -117,6 +119,7 @@ module ContextIO
       @email_addresses = [attributes[:email]] if attributes[:email]
       @first_name = attributes[:first_name]
       @last_name = attributes[:last_name]
+      @new_source = attributes[:new_source]
     end
 
     # Send the account info to Context.IO
@@ -223,6 +226,19 @@ module ContextIO
       attributes = { :email => self.email_addresses.first }
       attributes[:first_name] = self.first_name if self.first_name
       attributes[:last_name] = self.last_name if self.last_name
+      new_source = self.new_source
+      if new_source
+        attributes[:service_level] = new_source[:service_level] if new_source[:service_level]
+        attributes[:server] = new_source[:server] if new_source[:server]
+        attributes[:username] = new_source[:username] if new_source[:username]
+        attributes[:port] = new_source[:port] if new_source[:port]
+        attributes[:use_ssl] = new_source[:use_ssl] if new_source[:use_ssl]
+        attributes[:type] = new_source[:type] if new_source[:type]
+        attributes[:provider_token] = new_source[:provider_token] if new_source[:provider_token]
+        attributes[:provider_token_secret] = new_source[:provider_token_secret] if new_source[:provider_token_secret]
+        attributes[:provider_consumer_key] = new_source[:provider_consumer_key] if new_source[:provider_consumer_key]
+      end
+      
 
       response = post('/2.0/accounts', attributes)
       @id = response['id']

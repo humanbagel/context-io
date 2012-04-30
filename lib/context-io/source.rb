@@ -58,21 +58,21 @@ module ContextIO
       raise ArgumentError if account_id.to_s.empty?
 
       @account_id = account_id.to_s
-      @email = attributes['email']
-      @label = attributes['label'] || ''
-      @authentication_type = attributes['authentication_type']
-      @port = attributes['port'] || 143
-      @service_level = attributes['service_level']
-      @username = attributes['username']
-      @server = attributes['server']
-      @source_type = attributes['type'] || 'IMAP'
-      @sync_period = attributes['sync_period']
-      @use_ssl = attributes['use_ssl'] || false
-      @status = attributes['status']
-      @password = attributes['password']
-      @provider_token = attributes['provider_token']
-      @provider_token_secret = attributes['provider_token_secret']
-      @provider_consumer_key = attributes['provider_consumer_key']
+      @email = attributes[:email]
+      @label = attributes[:label] || ''
+      @authentication_type = attributes[:authentication_type]
+      @port = attributes[:port] || 143
+      @service_level = attributes[:service_level]
+      @username = attributes[:username]
+      @server = attributes[:server]
+      @source_type = attributes[:type] || 'IMAP'
+      @sync_period = attributes[:sync_period]
+      @use_ssl = attributes[:use_ssl] || 0
+      @status = attributes[:status]
+      @password = attributes[:password]
+      @provider_token = attributes[:provider_token]
+      @provider_token_secret = attributes[:provider_token_secret]
+      @provider_consumer_key = attributes[:provider_consumer_key]
     end
 
     # Returns all source's folders.
@@ -125,7 +125,7 @@ module ContextIO
       raise ArgumentError.new("Cannot set attributes on new record") if @label.to_s.empty?
       
       attributes.each do |k,v|
-        if ["status", "sync_period", "service_level", "password", "provider_token", "provider_token_secret", "provider_consumer_key"].include? k
+        if [:status, :sync_period, :service_level, :password, :provider_token, :provider_token_secret, :provider_consumer_key].include? k
           send("#{k}=", v)
         end
       end

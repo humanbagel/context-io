@@ -49,7 +49,7 @@ module ContextIO
         @server = json['imap']['server']
         @username = json['imap']['username']
         @port = json['imap']['port']
-        @use_ssl = json['imap']['use_ssl']
+        @use_ssl = (json['imap']['use_ssl'] == true ? 1 : 0)
         @oauth = json['imap']['oauth']
         @documentation = json['documentation'].inject{|i| i.symbolize_keys }
       end
@@ -59,12 +59,12 @@ module ContextIO
     
     def settings_hash
       settings = {}
-      settings["email"] = @email
-      settings["type"] = "IMAP"
-      settings["server"] = @server
-      settings["username"] = @username
-      settings["port"] = @port
-      settings["use_ssl"] = @use_ssl
+      settings[:email] = @email
+      settings[:type] = "IMAP"
+      settings[:server] = @server
+      settings[:username] = @username
+      settings[:port] = @port
+      settings[:use_ssl] = @use_ssl
       settings
     end
   end
