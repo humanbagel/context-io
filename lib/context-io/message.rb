@@ -30,6 +30,8 @@ module ContextIO
     #   Possible keys are `:email`, `:name` and `:thumbnail`. All values are
     #   Strings.
     attr_reader :cc
+    
+    attr_reader :body
 
     # @api public
     # @return [Array<ContextIO::Source>] The sources the message is connected
@@ -136,6 +138,7 @@ module ContextIO
         @account_id = account_id
         @message_id = json_msg['message_id']
         @subject = json_msg['subject']
+        @body = json_msg['body']
         @date = Time.at json_msg['date']
         @sources = json_msg['sources']
         @from = json_msg['addresses']['from']
