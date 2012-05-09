@@ -9,6 +9,7 @@ require 'context-io/oauth_provider'
 require 'context-io/source'
 require 'context-io/message'
 require 'context-io/folder'
+require 'context-io/webhook'
 
 # The main ContextIO namespace.
 module ContextIO
