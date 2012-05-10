@@ -26,25 +26,25 @@ module ContextIO
         @account_id = account_id.to_s
         @callback_url = json_msg['callback_url']
         @failure_notif_url = json_msg['failure_notif_url']
-        @active = json_msg['active']
-        @sync_period = json_msg['sync_period']
-        @filter_to = json_msg['filter_to']
-        @filter_from = json_msg['filter_from']
-        @filter_cc = json_msg['filter_cc']
-        @filter_subject = json_msg['filter_subject']
-        @filter_thread = json_msg['filter_thread']
-        @filter_new_important = json_msg['filter_new_important']
-        @filter_file_name = json_msg['filter_file_name']
-        @filter_file_revisions = json_msg['filter_file_revisions']
-        @filter_folder_added = json_msg['filter_folder_added']
-        @filter_folder_removed = json_msg['filter_folder_removed']
+        @active = json_msg['active'] if json_msg['active']
+        @sync_period = json_msg['sync_period'] if json_msg['sync_period']
+        @filter_to = json_msg['filter_to'] if json_msg['filter_to']
+        @filter_from = json_msg['filter_from'] if json_msg['filter_from']
+        @filter_cc = json_msg['filter_cc'] if json_msg['filter_cc']
+        @filter_subject = json_msg['filter_subject'] if json_msg['filter_subject']
+        @filter_thread = json_msg['filter_thread'] if json_msg['filter_thread']
+        @filter_new_important = json_msg['filter_new_important'] if json_msg['filter_new_important']
+        @filter_file_name = json_msg['filter_file_name'] if json_msg['filter_file_name']
+        @filter_file_revisions = json_msg['filter_file_revisions'] if json_msg['filter_file_revisions']
+        @filter_folder_added = json_msg['filter_folder_added'] if json_msg['filter_folder_added']
+        @filter_folder_removed = json_msg['filter_folder_removed'] if json_msg['filter_folder_removed']
       end
 
       webhook
     end
     
     def self.find(account, webhook_id)
-      return nil if account.nil? or message_id.nil?
+      return nil if account.nil? or webhook_id.nil?
       account_id = account.is_a?(Account) ? account.id : account.to_s
 
       Webhook.from_json(account_id, get("/2.0/accounts/#{account_id}/webhooks/#{webhook_id}"))
@@ -104,17 +104,17 @@ module ContextIO
     def initialize(attributes={})
       @callback_url = attributes[:callback_url]
       @failure_notif_url = attributes[:failure_notif_url]
-      @filter_to = attributes[:filter_to]
-      @filter_from = attributes[:filter_from]
-      @filter_cc = attributes[:filter_cc]
-      @filter_subject = attributes[:filter_subject]
-      @filter_thread = attributes[:filter_thread]
-      @filter_new_important = attributes[:filter_new_important]
-      @filter_file_name = attributes[:filter_file_name]
-      @filter_file_revisions = attributes[:filter_file_revisions]
-      @filter_folder_added = attributes[:filter_folder_added]
-      @filter_folder_removed = attributes[:filter_folder_removed]
-      @sync_period = attributes[:sync_period]
+      @filter_to = attributes[:filter_to] if attributes[:filter_to]
+      @filter_from = attributes[:filter_from] if attributes[:filter_from]
+      @filter_cc = attributes[:filter_cc] if attributes[:filter_cc]
+      @filter_subject = attributes[:filter_subject] if attributes[:filter_subject]
+      @filter_thread = attributes[:filter_thread] if attributes[:filter_thread]
+      @filter_new_important = attributes[:filter_new_important] if attributes[:filter_new_important]
+      @filter_file_name = attributes[:filter_file_name] if attributes[:filter_file_name]
+      @filter_file_revisions = attributes[:filter_file_revisions] if attributes[:filter_file_revisions]
+      @filter_folder_added = attributes[:filter_folder_added] if attributes[:filter_folder_added]
+      @filter_folder_removed = attributes[:filter_folder_removed] if attributes[:filter_folder_removed]
+      @sync_period = attributes[:sync_period] if attributes[:sync_period]
     end
   end
 end
