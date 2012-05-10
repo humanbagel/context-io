@@ -73,6 +73,7 @@ module ContextIO
       @provider_token = attributes[:provider_token]
       @provider_token_secret = attributes[:provider_token_secret]
       @provider_consumer_key = attributes[:provider_consumer_key]
+      @callback_url = attributes[:callback_url]
     end
 
     # Returns all source's folders.
@@ -159,6 +160,7 @@ module ContextIO
       params['provider_token'] = @provider_token if @provider_token
       params['provider_token_secret'] = @provider_token_secret if @provider_token_secret
       params['provider_consumer_key'] = @provider_consumer_key if @provider_consumer_key
+      params['callback_url'] = @callback_url if @callback_url
 
       response = post("/2.0/accounts/#{@account_id}/sources", params)
       response['success']
