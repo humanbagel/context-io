@@ -87,10 +87,10 @@ module ContextIO
     end
   end
   
-  private :create_record
+  private :create
   
   def save
-    create_record
+    create
   end
   
   def destroy
