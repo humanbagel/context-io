@@ -85,36 +85,36 @@ module ContextIO
 
       @saved = response['success']
     end
-  end
+    
+    private :create
   
-  private :create
+    def save
+      create
+    end
   
-  def save
-    create
-  end
-  
-  def destroy
-    return false if @webhook_id.to_s.empty?
+    def destroy
+      return false if @webhook_id.to_s.empty?
 
-    response = delete("/2.0/accounts/#{@account_id}/webhooks/#{@webhook_id}")
-    @webhook_id = '' if response['success']
+      response = delete("/2.0/accounts/#{@account_id}/webhooks/#{@webhook_id}")
+      @webhook_id = '' if response['success']
 
-    response['success']
-  end
+      response['success']
+    end
   
-  def initialize(attributes={})
-    @callback_url = attributes[:callback_url]
-    @failure_notif_url = attributes[:failure_notif_url]
-    @filter_to = attributes[:filter_to]
-    @filter_from = attributes[:filter_from]
-    @filter_cc = attributes[:filter_cc]
-    @filter_subject = attributes[:filter_subject]
-    @filter_thread = attributes[:filter_thread]
-    @filter_new_important = attributes[:filter_new_important]
-    @filter_file_name = attributes[:filter_file_name]
-    @filter_file_revisions = attributes[:filter_file_revisions]
-    @filter_folder_added = attributes[:filter_folder_added]
-    @filter_folder_removed = attributes[:filter_folder_removed]
-    @sync_period = attributes[:sync_period]
+    def initialize(attributes={})
+      @callback_url = attributes[:callback_url]
+      @failure_notif_url = attributes[:failure_notif_url]
+      @filter_to = attributes[:filter_to]
+      @filter_from = attributes[:filter_from]
+      @filter_cc = attributes[:filter_cc]
+      @filter_subject = attributes[:filter_subject]
+      @filter_thread = attributes[:filter_thread]
+      @filter_new_important = attributes[:filter_new_important]
+      @filter_file_name = attributes[:filter_file_name]
+      @filter_file_revisions = attributes[:filter_file_revisions]
+      @filter_folder_added = attributes[:filter_folder_added]
+      @filter_folder_removed = attributes[:filter_folder_removed]
+      @sync_period = attributes[:sync_period]
+    end
   end
 end
