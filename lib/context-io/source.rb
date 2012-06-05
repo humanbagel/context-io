@@ -20,7 +20,7 @@ module ContextIO
       return [] if account.nil?
 
       account_id = account.is_a?(Account) ? account.id : account.to_s
-      get("/2.0/accounts/#{account_id}/sources", query).map do |msg|
+      get("/2.0/accounts/#{account_id}/sources", query) do |msg|
         Source.from_json(account_id, msg)
       end
     end
@@ -58,22 +58,22 @@ module ContextIO
       raise ArgumentError if account_id.to_s.empty?
 
       @account_id = account_id.to_s
-      @email = attributes[:email]
-      @label = attributes[:label] || ''
-      @authentication_type = attributes[:authentication_type]
-      @port = attributes[:port] || 143
-      @service_level = attributes[:service_level]
-      @username = attributes[:username]
-      @server = attributes[:server]
-      @source_type = attributes[:type] || 'IMAP'
-      @sync_period = attributes[:sync_period]
-      @use_ssl = attributes[:use_ssl] || 0
-      @status = attributes[:status]
-      @password = attributes[:password]
-      @provider_token = attributes[:provider_token]
-      @provider_token_secret = attributes[:provider_token_secret]
-      @provider_consumer_key = attributes[:provider_consumer_key]
-      @callback_url = attributes[:callback_url]
+      @email = attributes['email']
+      @label = attributes['label'] || ''
+      @authentication_type = attributes['authentication_type']
+      @port = attributes['port'] || 143
+      @service_level = attributes['service_level']
+      @username = attributes['username']
+      @server = attributes['server']
+      @source_type = attributes['type'] || 'IMAP'
+      @sync_period = attributes['sync_period']
+      @use_ssl = attributes['use_ssl'] || 0
+      @status = attributes['status']
+      @password = attributes['password']
+      @provider_token = attributes['provider_token']
+      @provider_token_secret = attributes['provider_token_secret']
+      @provider_consumer_key = attributes['provider_consumer_key']
+      @callback_url = attributes['callback_url']
     end
 
     # Returns all source's folders.

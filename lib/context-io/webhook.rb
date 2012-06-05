@@ -20,7 +20,7 @@ module ContextIO
     
     def self.from_json(account_id, json_msg)
       raise ArgumentError if account_id.to_s.empty?
-      webhook = new
+      webhook = new(account_id)
       webhook.instance_eval do
         @webhook_id = json_msg['webhook_id']
         @account_id = account_id.to_s
@@ -101,7 +101,9 @@ module ContextIO
       response['success']
     end
   
-    def initialize(attributes={})
+    def initialize(account_id, attributes={})
+      raise ArgumentError if account_id.to_s.empty?
+      @account_id = account_id.to_s
       @callback_url = attributes[:callback_url]
       @failure_notif_url = attributes[:failure_notif_url]
       @filter_to = attributes[:filter_to] if attributes[:filter_to]

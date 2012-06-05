@@ -117,11 +117,11 @@ module ContextIO
       end
     end
 
-    def self.find(account, message_id)
+    def self.find(account, message_id, options = {})
       return nil if account.nil? or message_id.nil?
       account_id = account.is_a?(Account) ? account.id : account.to_s
 
-      Message.from_json(account_id, get("/2.0/accounts/#{account_id}/messages/#{message_id}"))
+      Message.from_json(account_id, get("/2.0/accounts/#{account_id}/messages/#{message_id}", options))
     end
 
     # Create an Message instance from the JSON returned by the API
@@ -171,8 +171,15 @@ module ContextIO
         get("#{url}/body").each do |b|
           @body[b["type"]] = b["content"]
         end
+        result = @body["text/#{format}"]
+      else
+        result = @body.each do |b|
+          if b['type'] == "text/#{format}"
+            return b["content"]
+          end
+        end
       end
-      @body["text/#{format}"]
+      result
     end
 
     # @api public
