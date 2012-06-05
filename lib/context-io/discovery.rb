@@ -59,12 +59,12 @@ module ContextIO
     
     def settings_hash
       settings = {}
-      settings[:email] = @email
-      settings[:type] = "IMAP"
-      settings[:server] = @server
-      settings[:username] = @username
-      settings[:port] = @port
-      settings[:use_ssl] = @use_ssl
+      settings['email'] = @email
+      settings['type'] = "IMAP"
+      settings['server'] = @server
+      settings['username'] = @username
+      settings['port'] = @port
+      settings['use_ssl'] = @use_ssl
       settings
     end
   end
